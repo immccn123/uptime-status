@@ -42,7 +42,7 @@ function UptimeRobot({ apikey, callback }) {
             let text = data.date.format("YYYY-MM-DD ");
             if (data.uptime >= 100) {
               status = "ok";
-              text += `高可用性，可用率 ${formatNumber(data.uptime)}%`;
+              text += `可用率 ${formatNumber(data.uptime)}%`;
             } else if (data.uptime <= 0 && data.down.times === 0) {
               status = "none";
               text += "无数据";

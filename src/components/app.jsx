@@ -38,7 +38,6 @@ function App() {
   };
 
   const setTotalStatus = () => {
-    // setStatus("some");
     switch (status) {
       case "ok":
         return (
@@ -87,7 +86,7 @@ function App() {
           <p>
             Powered by <Link to="https://status.org.cn/" text="STATUS.ORG.CN" />
             <br />
-            Customized by <Link to="https://imken.moe" text="Imken" />
+            Customized by <Link to="https://imken.moe" text="Imken" />, <Link to="github.com/immccn123/uptime-status/" text="source code" />
           </p>
         </div>
       </div>
