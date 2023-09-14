@@ -4,10 +4,10 @@ import { GetMonitors } from "../common/uptimerobot";
 import { formatDuration, formatNumber } from "../common/helper";
 import Link from "./link";
 
-function UptimeRobot({ apikey }) {
+function UptimeRobot({ apikey, callback }) {
   const status = {
-    ok: "正常",
-    down: "故障",
+    ok: "可用",
+    down: "中断",
     unknow: "未知",
   };
 
@@ -19,6 +19,10 @@ function UptimeRobot({ apikey }) {
     GetMonitors(apikey, CountDays).then(setMonitors);
   }, [apikey, CountDays]);
 
+  useEffect(() => {
+    callback(monitors);
+  }, [monitors]);
+
   if (monitors)
     return monitors.map((site) => (
       <div key={site.id} className="site">
@@ -28,7 +32,9 @@ function UptimeRobot({ apikey }) {
             dangerouslySetInnerHTML={{ __html: site.name }}
           />
           {ShowLink && <Link className="link" to={site.url} text={site.name} />}
-          <span className={"status " + site.status}>{status[site.status]}</span>
+          <span className={"status " + site.status}>
+            <i className={"expander " + site.status} /> {status[site.status]}
+          </span>
         </div>
         <div className="timeline">
           {site.daily.map((data, index) => {
@@ -40,20 +46,15 @@ function UptimeRobot({ apikey }) {
             } else if (data.uptime <= 0 && data.down.times === 0) {
               status = "none";
               text += "无数据";
-            } else if (data.uptime >= 98 && data.down.times !== 0) {
-              status = "partial";
-              text += `中可用性，故障 ${
-                data.down.times
-              } 次，累计 ${formatDuration(
-                data.down.duration
-              )}，可用率 ${formatNumber(data.uptime)}%`;
+            } else if (data.uptime >= 98) {
+              status = "partial-high";
+              text += `可用率 ${formatNumber(data.uptime)}%`;
+            } else if (data.uptime >= 95 && data.uptime <= 98) {
+              status = "mid";
+              text += `可用率 ${formatNumber(data.uptime)}%`;
             } else {
-              status = "down";
-              text += `低可用性，故障 ${
-                data.down.times
-              } 次，累计 ${formatDuration(
-                data.down.duration
-              )}，可用率 ${formatNumber(data.uptime)}%`;
+              status = "low";
+              text += `可用率 ${formatNumber(data.uptime)}%`;
             }
             return (
               <i

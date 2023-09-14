@@ -2,9 +2,11 @@
 
 一个基于 UptimeRobot API 的在线状态面板，这个版本是修改主题过后的。
 
+稍微仿了下原生的样式（
+
 Screenshot:
 
-![](/screenshot.webp)
+![](/screenshot.png)
 
 ## 构建
 
