@@ -86,7 +86,7 @@ function App() {
           <p>
             Powered by <Link to="https://status.org.cn/" text="STATUS.ORG.CN" />
             <br />
-            Customized by <Link to="https://imken.moe" text="Imken" />, <Link to="github.com/immccn123/uptime-status/" text="source code" />
+            Customized by <Link to="https://imken.moe" text="Imken" />, <Link to="https://github.com/immccn123/uptime-status/" text="source code" />
           </p>
         </div>
       </div>
