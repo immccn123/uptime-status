@@ -2,7 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { formatNumber } from "./helper";
 
-export async function GetMonitors(apikey, days) {
+export async function GetMonitors({ apikey, days }) {
   const dates = [];
   const today = dayjs(new Date().setHours(0, 0, 0, 0));
   for (let d = 0; d < days; d++) {

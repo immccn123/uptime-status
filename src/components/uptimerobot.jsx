@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { GetMonitors } from "../common/uptimerobot";
 import { formatDuration, formatNumber } from "../common/helper";
 import Link from "./link";
+import useSWR from "swr";
 
 function UptimeRobot({ apikey, callback }) {
   const status = {
@@ -15,9 +16,15 @@ function UptimeRobot({ apikey, callback }) {
 
   const [monitors, setMonitors] = useState();
 
+  const { data, isValidating } = useSWR(
+    { apikey, days: CountDays },
+    GetMonitors,
+    { refreshInterval: 60000, revalidateOnFocus: false }
+  );
+
   useEffect(() => {
-    GetMonitors(apikey, CountDays).then(setMonitors);
-  }, [apikey, CountDays]);
+    if (data != undefined) setMonitors(data);
+  }, [data]);
 
   useEffect(() => {
     callback(monitors);
@@ -33,6 +40,7 @@ function UptimeRobot({ apikey, callback }) {
           />
           {ShowLink && <Link className="link" to={site.url} text={site.name} />}
           <span className={"status " + site.status}>
+            {isValidating ? <span className="refreshing"></span> : <></>}
             <i className={"expander " + site.status} /> {status[site.status]}
           </span>
         </div>
