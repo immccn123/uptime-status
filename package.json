@@ -32,6 +32,7 @@
     ]
   },
   "devDependencies": {
-    "lightningcss": "^1.21.8"
+    "lightningcss": "^1.21.8",
+    "terser": "^5.19.4"
   }
 }

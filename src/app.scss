@@ -57,7 +57,7 @@ a {
 
 #total-status {
   padding: 30px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   font-size: 30px;
   width: 100%;
   display: flex;
@@ -86,9 +86,8 @@ a {
       height: 60px;
       position: absolute;
       border-radius: 50%;
-      transform: scale(0);
       opacity: 1;
-      animation: expandCircle 1.8s ease infinite;
+      animation: expandCircleSmall 2.2s ease infinite;
     }
     &.ok {
       background-color: $up-color;
@@ -125,12 +124,23 @@ a {
   }
 }
 
-@keyframes spin {
+@keyframes expandCircleSmall {
   0% {
-    transform: rotate(0deg);
+    transform: scale(0.5);
+    opacity: 1;
   }
   100% {
-    transform: rotate(360deg);
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
   }
 }
 
@@ -138,7 +148,6 @@ a {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 10px 10px #0000001a;
-  margin-top: -30px;
   margin-bottom: 40px;
   padding: 15px 0;
   overflow: hidden;
@@ -147,13 +156,18 @@ a {
     margin: 0 30px;
     padding: 25px 0;
     .loading {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23D6D8D8' d='M19.52 42.712c9.897 2.916 20.285-2.743 23.201-12.64l-3.902-1.15c-2.281 7.742-10.407 12.17-18.15 9.888l-1.15 3.902z'%3E%3CanimateTransform attributeType='xml' attributeName='transform' type='rotate' from='0 25 25' to='360 25 25' dur='0.6s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      display: block;
-      margin: 0 auto;
-      width: 40px;
-      height: 40px;
+      text-align: center;
+      &::before {
+        content: "";
+        display: inline-block;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #a5a5a5;
+        border-radius: 50%;
+        position: relative;
+        width: 40px;
+        height: 40px;
+        animation: spin 1.5s ease infinite;
+      }
     }
     .meta {
       display: flex;
@@ -195,7 +209,6 @@ a {
             height: 12px;
             position: absolute;
             border-radius: 50%;
-            transform: scale(0);
             opacity: 1;
             animation: expandCircle 1.8s ease infinite;
           }
@@ -250,7 +263,7 @@ a {
         margin: 0 1px;
         height: 25px;
         border-radius: 5px;
-        transition: opacity ease 150ms;
+        transition: ease 150ms !important;
         &.ok {
           background-color: $up-color;
         }
@@ -294,7 +307,7 @@ a {
   font-size: 12px;
   text-align: center;
   line-height: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   color: #969ea8;
   a {
     font-weight: bold;
