@@ -2,6 +2,7 @@ window.Config = {
 
   // 显示标题
   SiteName: 'Imken Service Status',
+  Subtitle: '服务状态',
 
   // UptimeRobot Api Keys
   // 支持 Monitor-Specific 和 Read-Only
@@ -18,16 +19,4 @@ window.Config = {
 
   // 是否显示检测站点的链接
   ShowLink: true,
-
-  // 导航栏菜单
-  Navi: [
-    {
-      text: 'Profile',
-      url: 'https://imken.moe/'
-    },
-    {
-      text: 'Blog',
-      url: 'https://blog.immccn123.xyz/'
-    },
-  ],
 };

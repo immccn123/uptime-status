@@ -3,7 +3,7 @@ import Link from "./link";
 import Header from "./header";
 import UptimeRobot from "./uptimerobot";
 
-function App() {
+const App = () => {
   const apikeys = useMemo(() => {
     const { ApiKeys } = window.Config;
     if (Array.isArray(ApiKeys)) return ApiKeys;

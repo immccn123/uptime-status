@@ -1,8 +1,8 @@
-export function formatNumber(value) {
+export const formatNumber = (value) => {
   return (Math.floor(value * 100) / 100).toString();
 }
 
-export function formatDuration(seconds) {
+export const formatDuration = (seconds) => {
   let s = parseInt(seconds);
   let m = 0;
   let h = 0;

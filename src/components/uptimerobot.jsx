@@ -1,6 +1,6 @@
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { useEffect, useState } from "react";
-import { GetMonitors } from "../common/uptimerobot";
+import { getMonitors } from "../common/uptimerobot";
 import { formatDuration, formatNumber } from "../common/helper";
 import Link from "./link";
 import useSWR from "swr";
@@ -18,7 +18,7 @@ function UptimeRobot({ apikey, callback }) {
 
   const { data, isValidating } = useSWR(
     { apikey, days: CountDays },
-    GetMonitors,
+    getMonitors,
     { refreshInterval: 60000, revalidateOnFocus: false }
   );
 
@@ -61,7 +61,7 @@ function UptimeRobot({ apikey, callback }) {
               status = "mid";
               text += `可用率 ${formatNumber(data.uptime)}%`;
             } else {
-              status = "low";
+              status = "down";
               text += `可用率 ${formatNumber(data.uptime)}%`;
             }
             return (
