@@ -1,5 +1,4 @@
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import { useEffect, useState } from "react";
 import { getMonitors } from "../common/uptimerobot";
 import { formatDuration, formatNumber } from "../common/helper";
 import Link from "./link";
@@ -75,12 +74,12 @@ function UptimeRobot({ apikey, callback }) {
           <span>{site.daily[0].date.format("YYYY-MM-DD")}</span>
           <span>
             {site.total.times
-              ? `最近 ${CountDays} 天故障 ${
+              ? `近 ${CountDays} 天故障 ${
                   site.total.times
                 } 次，累计 ${formatDuration(site.total.duration)}，平均可用率 ${
                   site.average
                 }%`
-              : `最近 ${CountDays} 天可用率 ${site.average}%`}
+              : `近 ${CountDays} 天可用率 ${site.average}%`}
           </span>
           <span>今天</span>
         </div>

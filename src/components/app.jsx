@@ -3,6 +3,11 @@ import Link from "./link";
 import Header from "./header";
 import UptimeRobot from "./uptimerobot";
 
+const LOADING = Symbol();
+const OK = Symbol()
+const DOWN = Symbol();
+const SOME = Symbol();
+
 const App = () => {
   const apikeys = useMemo(() => {
     const { ApiKeys } = window.Config;
@@ -14,12 +19,12 @@ const App = () => {
   const [monitorStatus, setMonitorStatus] = useState(apikeys.map(() => null));
 
   const status = monitorStatus.some((x) => x === null)
-    ? "loading"
+    ? LOADING
     : monitorStatus.every((x) => x == "ok")
-    ? "ok"
+    ? OK
     : monitorStatus.every((x) => x == "down")
-    ? "down"
-    : "some";
+    ? DOWN
+    : SOME;
 
   const checkStatusMaker = (index) => {
     return async (monitor) => {
@@ -58,21 +63,21 @@ const App = () => {
 
   const setTotalStatus = () => {
     switch (status) {
-      case "ok":
+      case OK:
         return (
           <>
             <i className="expander ok" />
             全部服务<span className="ok">可用</span>
           </>
         );
-      case "some":
+      case SOME:
         return (
           <>
             <i className="expander some" />
             部分服务<span className="some">中断</span>
           </>
         );
-      case "down":
+      case DOWN:
         return (
           <>
             <i className="expander down" />
