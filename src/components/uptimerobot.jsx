@@ -14,24 +14,20 @@ function UptimeRobot({ apikey, callback }) {
 
   const { CountDays, ShowLink } = window.Config;
 
-  const [monitors, setMonitors] = useState();
-
   const { data, isValidating } = useSWR(
     { apikey, days: CountDays },
     getMonitors,
-    { refreshInterval: 60000, revalidateOnFocus: false }
+    {
+      refreshInterval: 60000,
+      revalidateOnFocus: false,
+      onSuccess: (data) => {
+        callback(data);
+      },
+    }
   );
 
-  useEffect(() => {
-    if (data != undefined) setMonitors(data);
-  }, [data]);
-
-  useEffect(() => {
-    callback(monitors);
-  }, [monitors]);
-
-  if (monitors)
-    return monitors.map((site) => (
+  if (data)
+    return data.map((site) => (
       <div key={site.id} className="site">
         <div className="meta">
           <span
