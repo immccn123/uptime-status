@@ -9,7 +9,7 @@ window.Config = {
   ApiKeys: [
     'm794118336-d8a3ecfeaf83115869bd85e6', // imken-blog
     'm795283182-5b9afc8984dd5d36cc731697', // Luogu Feed Saver
-    'm795283190-3b1e29bd3608710f7c3c14ea', // Luogu Feed API (Proxy)
+    'm797098613-a2720b05a17d5be73b32b7e9', // Luogu Benben Saver API
     'm795283201-8440c5e1d9f7a68e4afaaf69', // Kalutines
     'm795283221-4ead804fef88122a14fdd57d', // Imken Static Files
   ],
