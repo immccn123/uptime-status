@@ -57,10 +57,6 @@ const App = () => {
     };
   };
 
-  useEffect(() => {
-    console.log("update", monitorStatus);
-  }, [monitorStatus]);
-
   const setTotalStatus = () => {
     switch (status) {
       case OK:

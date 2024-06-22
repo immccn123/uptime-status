@@ -1,7 +1,15 @@
-$primary-color: #dd94a0;
-$up-color: #58ce69;
-$partial-high-color: #8bdf97;
-$down-color: #d4393b;
+@import url("https://fonts.googleapis.com/css2?family=Akatab:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap");
+
+$primary-color: #8f4953;
+$up-color: #3f6837;
+$partial-high-color: #a4d396;
+$down-color: #ba1a1a;
+$warn-color: #e9bf8f;
+$warn-text-color: #785830;
+$header-bg-color: #ffd9dc;
+$header-title-text-color: #8f4953;
+$header-title-secondary-text-color: #765659;
 
 * {
   margin: 0;
@@ -9,11 +17,11 @@ $down-color: #d4393b;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: "Akatab", "Noto Sans SC", sans-serif;
   font-size: 14px;
   line-height: 1;
   color: #131a26;
-  background-color: #fffafa;
+  background-color: #f0dedf;
 }
 
 a {
@@ -33,12 +41,7 @@ a {
 #header {
   padding: 110px 0 95px 0;
   margin-bottom: -60px;
-  background-image: linear-gradient(
-    45deg,
-    #ff9a9e 0%,
-    #fad0c4 99%,
-    #fad0c4 100%
-  );
+  // background-color: $header-bg-color;
   color: $primary-color;
   width: 100%;
   // display: flex;
@@ -49,12 +52,12 @@ a {
   }
   .logo {
     font-size: 2.5rem;
-    color: white;
+    color: $header-title-text-color;
   }
   .subtitle {
     padding-top: 15px;
     font-size: 1.1rem;
-    color: #fdecec;
+    color: $header-title-secondary-text-color;
   }
 }
 
@@ -65,14 +68,13 @@ a {
   width: 100%;
   display: flex;
   align-items: center;
-  box-shadow: 0 0 10px #0000001a;
-  background-color: white;
+  background-color: #fff0f0;
   border-radius: 10px;
   .ok {
     color: $up-color;
   }
   .some {
-    color: #f8c726;
+    color: $warn-text-color;
   }
   .down {
     color: $down-color;
@@ -99,9 +101,9 @@ a {
       }
     }
     &.some {
-      background-color: #f8c726;
+      background-color: $warn-color;
       &::before {
-        background-color: #f8c726;
+        background-color: $warn-color;
       }
     }
     &.down {
@@ -148,9 +150,8 @@ a {
 }
 
 #uptime {
-  background-color: #ffffff;
+  background-color: #fff0f0;
   border-radius: 10px;
-  box-shadow: 0 10px 10px #0000001a;
   transition: 0.05s ease;
   margin-bottom: 40px;
   padding: 15px 0;
@@ -275,13 +276,13 @@ a {
           background-color: $down-color;
         }
         &.none {
-          background-color: #e5e8eb;
+          background-color: #d3c3c3;
         }
         &.partial-high {
           background-color: $partial-high-color;
         }
         &.mid {
-          background-color: #f8c726;
+          background-color: $warn-color;
         }
         &:hover {
           opacity: 0.6;
@@ -312,7 +313,7 @@ a {
   text-align: center;
   line-height: 25px;
   margin-bottom: 40px;
-  color: #969ea8;
+  color: #524344;
   a {
     font-weight: bold;
     color: $primary-color;
