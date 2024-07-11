@@ -2,6 +2,9 @@ export const formatNumber = (value) => {
   return (Math.floor(value * 100) / 100).toString();
 }
 
+/**
+ * @param {number} seconds
+ */
 export const formatDuration = (seconds) => {
   let s = parseInt(seconds);
   let m = 0;

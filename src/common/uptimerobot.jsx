@@ -1,8 +1,23 @@
+/**
+ * @typedef {import('dayjs')} dayjs
+ */
+
 import axios from "axios";
 import dayjs from "dayjs";
 import { formatNumber } from "./helper";
 
+const statusTable = {
+  2: "ok",
+  9: "down",
+};
+
+/**
+ *
+ * @param {{ apikey: string, days: number }} param0
+ * @returns
+ */
 export async function getMonitors({ apikey, days }) {
+  /** @type {dayjs.Dayjs[]} */
   const dates = [];
   const today = dayjs(new Date().setHours(0, 0, 0, 0));
   for (let d = 0; d < days; d++) {
@@ -26,52 +41,88 @@ export async function getMonitors({ apikey, days }) {
     custom_uptime_ranges: ranges.join("-"),
   };
 
-  const response = await axios.post(
+  const { data: respData } = await axios.post(
     "https://cors.status.org.cn/uptimerobot/v2/getMonitors",
     postdata,
     { timeout: 10000 }
   );
-  if (response.data.stat !== "ok") throw response.data.error;
-  return response.data.monitors.map((monitor) => {
-    const ranges = monitor.custom_uptime_ranges.split("-");
-    const average = formatNumber(ranges.pop());
-    const daily = [];
-    const map = [];
-    dates.forEach((date, index) => {
-      map[date.format("YYYYMMDD")] = index;
-      daily[index] = {
-        date: date,
-        uptime: formatNumber(ranges[index]),
-        down: { times: 0, duration: 0 },
+
+  if (respData.stat !== "ok") throw respData.error;
+
+  return respData.monitors.map(
+    (
+      /**
+       * @type {{
+       *   logs: any[],
+       *   custom_uptime_ranges: string,
+       *   friendly_name: string,
+       *   url: string
+       * }}
+       */ {
+        custom_uptime_ranges,
+        logs,
+        id,
+        friendly_name: name,
+        url,
+        status: monitorStatus,
+      }
+    ) => {
+      const ranges = custom_uptime_ranges.split("-");
+      const average = formatNumber(ranges.pop());
+
+      /** @type {Record<string, number>} */
+      const map = {};
+
+      /**
+       * @type {{
+       *   date,
+       *   uptime,
+       *   down: {
+       *     times: number,
+       *     duration: number,
+       *   }
+       * }}
+       */
+      const daily = [];
+
+      dates.forEach((date, index) => {
+        map[date.format("YYYYMMDD")] = index;
+        daily[index] = {
+          date,
+          uptime: formatNumber(ranges[index]),
+          down: { times: 0, duration: 0 },
+        };
+      });
+
+      /**
+       * @type {{
+       *   times: number,
+       *   duration: number,
+       * }[]}
+       */
+      const total = logs.reduce(
+        (total, log) => {
+          if (log.type === 1) {
+            const date = dayjs.unix(log.datetime).format("YYYYMMDD");
+            total.duration += log.duration;
+            total.times += 1;
+            daily[map[date]].down.duration += log.duration;
+            daily[map[date]].down.times += 1;
+          }
+          return total;
+        },
+        { times: 0, duration: 0 }
+      );
+
+      return {
+        id,
+        name,
+        url,
+        average,
+        daily: daily.reverse(),
+        total,
+        status: statusTable[monitorStatus] ?? "unknow",
       };
-    });
-
-    const total = monitor.logs.reduce(
-      (total, log) => {
-        if (log.type === 1) {
-          const date = dayjs.unix(log.datetime).format("YYYYMMDD");
-          total.duration += log.duration;
-          total.times += 1;
-          daily[map[date]].down.duration += log.duration;
-          daily[map[date]].down.times += 1;
-        }
-        return total;
-      },
-      { times: 0, duration: 0 }
-    );
-
-    const result = {
-      id: monitor.id,
-      name: monitor.friendly_name,
-      url: monitor.url,
-      average: average,
-      daily: daily.reverse(),
-      total: total,
-      status: "unknow",
-    };
-
-    if (monitor.status === 2) result.status = "ok";
-    if (monitor.status === 9) result.status = "down";
-    return result;
-  });
+    }
+  );
 }

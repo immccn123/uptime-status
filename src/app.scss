@@ -1,15 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Akatab:wght@400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap");
 
-$primary-color: #8f4953;
-$up-color: #3f6837;
-$partial-high-color: #a4d396;
-$down-color: #ba1a1a;
-$warn-color: #e9bf8f;
-$warn-text-color: #785830;
-$header-bg-color: #ffd9dc;
-$header-title-text-color: #8f4953;
-$header-title-secondary-text-color: #765659;
+:root {
+  --primary-color: #8f4953;
+  --secondary-color: #765659;
+  --up-color: #3f6837;
+  --partial-high-color: #a4d396;
+  --down-color: #ba1a1a;
+  --warn-color: #e9bf8f;
+  --warn-text-color: #785830;
+  --body-text-color: #131a26;
+
+  --status-bgcolor: #fff0f0;
+  --body-bg: #f0dedf;
+
+  @media (prefers-color-scheme: dark) {
+    --primary-color: #ffb2ba;
+    --secondary-color: #e5bdc0;
+
+    --status-bgcolor: #413737;
+    --body-bg: #1a1112;
+    --body-text-color: #f0dedf;
+    --up-color: #a4d396;
+    --down-color: #ffb4ab;
+  }
+}
 
 * {
   margin: 0;
@@ -20,8 +35,8 @@ body {
   font-family: "Akatab", "Noto Sans SC", sans-serif;
   font-size: 14px;
   line-height: 1;
-  color: #131a26;
-  background-color: #f0dedf;
+  color: var(--body-text-color);
+  background-color: var(--body-bg);
 }
 
 a {
@@ -41,23 +56,20 @@ a {
 #header {
   padding: 110px 0 95px 0;
   margin-bottom: -60px;
-  // background-color: $header-bg-color;
-  color: $primary-color;
+  color: var(--primary-color);
   width: 100%;
-  // display: flex;
   .container {
-    // display: flex;
     align-items: baseline;
     justify-content: space-between;
   }
   .logo {
     font-size: 2.5rem;
-    color: $header-title-text-color;
+    color: var(--primary-color);
   }
   .subtitle {
     padding-top: 15px;
     font-size: 1.1rem;
-    color: $header-title-secondary-text-color;
+    color: var(--secondary-color);
   }
 }
 
@@ -68,16 +80,16 @@ a {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: #fff0f0;
+  background-color: var(--status-bgcolor);
   border-radius: 10px;
   .ok {
-    color: $up-color;
+    color: var(--up-color);
   }
   .some {
-    color: $warn-text-color;
+    color: var(--warn-color);
   }
   .down {
-    color: $down-color;
+    color: var(--down-color);
   }
   .expander {
     width: 60px;
@@ -95,21 +107,21 @@ a {
       animation: expandCircleSmall 2.2s ease infinite;
     }
     &.ok {
-      background-color: $up-color;
+      background-color: var(--up-color);
       &::before {
-        background-color: $up-color;
+        background-color: var(--up-color);
       }
     }
     &.some {
-      background-color: $warn-color;
+      background-color: var(--warn-color);
       &::before {
-        background-color: $warn-color;
+        background-color: var(--warn-color);
       }
     }
     &.down {
-      background-color: $down-color;
+      background-color: var(--down-color);
       &::before {
-        background-color: $down-color;
+        background-color: var(--down-color);
       }
     }
     &.unknow {
@@ -150,7 +162,7 @@ a {
 }
 
 #uptime {
-  background-color: #fff0f0;
+  background-color: var(--status-bgcolor);
   border-radius: 10px;
   transition: 0.05s ease;
   margin-bottom: 40px;
@@ -218,15 +230,15 @@ a {
             animation: expandCircle 1.8s ease infinite;
           }
           &.ok {
-            background-color: $up-color;
+            background-color: var(--up-color);
             &::before {
-              background-color: $up-color;
+              background-color: var(--up-color);
             }
           }
           &.down {
-            background-color: $down-color;
+            background-color: var(--down-color);
             &::before {
-              background-color: $down-color;
+              background-color: var(--down-color);
             }
           }
           &.unknow {
@@ -234,10 +246,10 @@ a {
           }
         }
         &.ok {
-          color: $up-color;
+          color: var(--up-color);
         }
         &.down {
-          color: $down-color;
+          color: var(--down-color);
         }
         &.unknow {
           color: #969ea8;
@@ -270,19 +282,19 @@ a {
         border-radius: 5px;
         transition: ease 150ms !important;
         &.ok {
-          background-color: $up-color;
+          background-color: var(--up-color);
         }
         &.down {
-          background-color: $down-color;
+          background-color: var(--down-color);
         }
         &.none {
           background-color: #d3c3c3;
         }
         &.partial-high {
-          background-color: $partial-high-color;
+          background-color: var(--partial-high-color);
         }
         &.mid {
-          background-color: $warn-color;
+          background-color: var(--warn-color);
         }
         &:hover {
           opacity: 0.6;
@@ -313,9 +325,8 @@ a {
   text-align: center;
   line-height: 25px;
   margin-bottom: 40px;
-  color: #524344;
   a {
     font-weight: bold;
-    color: $primary-color;
+    color: var(--primary-color);
   }
 }

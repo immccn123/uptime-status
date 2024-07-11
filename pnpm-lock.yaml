@@ -32,12 +32,15 @@ importers:
       swr:
         specifier: ^2.2.5
         version: 2.2.5(react@18.3.1)
+      ts-pattern:
+        specifier: ^5.2.0
+        version: 5.2.0
       vite:
         specifier: ^5.2.10
         version: 5.2.10(lightningcss@1.24.1)(sass@1.75.0)(terser@5.31.0)
       vite-plugin-svgr:
         specifier: ^4.2.0
-        version: 4.2.0(rollup@3.29.4)(vite@5.2.10(lightningcss@1.24.1)(sass@1.75.0)(terser@5.31.0))
+        version: 4.2.0(rollup@4.17.2)(vite@5.2.10(lightningcss@1.24.1)(sass@1.75.0)(terser@5.31.0))
     devDependencies:
       lightningcss:
         specifier: ^1.24.1
@@ -915,11 +918,6 @@ packages:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
 
-  rollup@3.29.4:
-    resolution: {integrity: sha512-oWzmBZwvYrU0iJHtDmhsm662rC15FRXmcjCk1xD771dFDx5jJ02ufAQQTn0etB2emNk4J9EZg/yWKpsn9BWGRw==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-
   rollup@4.17.2:
     resolution: {integrity: sha512-/9ClTJPByC0U4zNLowV1tMBe8yMEAxewtR3cUNX5BoEpGH3dQEWpJLr6CLp0fPdYRF/fzVOgvDb1zXuakwF5kQ==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -975,6 +973,9 @@ packages:
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
+
+  ts-pattern@5.2.0:
+    resolution: {integrity: sha512-aGaSpOlDcns7ZoeG/OMftWyQG1KqPVhgplhJxNCvyIXqWrumM5uIoOSarw/hmmi/T1PnuQ/uD8NaFHvLpHicDg==}
 
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
@@ -1261,13 +1262,13 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@rollup/pluginutils@5.1.0(rollup@3.29.4)':
+  '@rollup/pluginutils@5.1.0(rollup@4.17.2)':
     dependencies:
       '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
     optionalDependencies:
-      rollup: 3.29.4
+      rollup: 4.17.2
 
   '@rollup/rollup-android-arm-eabi@4.17.2':
     optional: true
@@ -1770,11 +1771,6 @@ snapshots:
 
   resolve-from@4.0.0: {}
 
-  rollup@3.29.4:
-    optionalDependencies:
-      fsevents: 2.3.3
-    optional: true
-
   rollup@4.17.2:
     dependencies:
       '@types/estree': 1.0.5
@@ -1848,6 +1844,8 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
+  ts-pattern@5.2.0: {}
+
   tslib@2.6.2: {}
 
   update-browserslist-db@1.0.13(browserslist@4.23.0):
@@ -1860,9 +1858,9 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  vite-plugin-svgr@4.2.0(rollup@3.29.4)(vite@5.2.10(lightningcss@1.24.1)(sass@1.75.0)(terser@5.31.0)):
+  vite-plugin-svgr@4.2.0(rollup@4.17.2)(vite@5.2.10(lightningcss@1.24.1)(sass@1.75.0)(terser@5.31.0)):
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@3.29.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.17.2)
       '@svgr/core': 8.1.0
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
       vite: 5.2.10(lightningcss@1.24.1)(sass@1.75.0)(terser@5.31.0)
