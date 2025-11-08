@@ -42,7 +42,7 @@ export async function getMonitors({ apikey, days }) {
   };
 
   const { data: respData } = await axios.post(
-    "https://cors.status.org.cn/uptimerobot/v2/getMonitors",
+    "https://api.uptimerobot.com/v2/getMonitors",
     postdata,
     { timeout: 10000 }
   );
